@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital - Restaurante Delícia</title>
+    <style>
+        /* Reset e Variáveis CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #e63946;
+            --secondary: #f1faee;
+            --dark: #1d3557;
+            --light: #a8dadc;
+            --highlight: #457b9d;
+            --text: #333;
+            --text-light: #666;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Cabeçalho */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-style: italic;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+        
+        /* Filtros de Categoria */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 12px 25px;
+            background-color: var(--highlight);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .filter-btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(225, 29, 72, 0.3);
+        }
+        
+        /* Seções do Cardápio */
+        .menu-section {
+            margin-bottom: 50px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            color: var(--dark);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            display: inline-block;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Itens do Cardápio */
+        .menu-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .item-details {
+            padding: 20px;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .item-title {
+            font-size: 1.4rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .item-price {
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .item-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Rodapé */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .contact-info {
+            margin-top: 10px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Restaurante Delícia</h1>
+            <p class="subtitle">Cardápio Digital</p>
+        </header>
+
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="all">Todos</button>
+            <button class="filter-btn" data-category="entradas">Entradas</button>
+            <button class="filter-btn" data-category="principais">Pratos Principais</button>
+            <button class="filter-btn" data-category="sobremesas">Sobremesas</button>
+            <button class="filter-btn" data-category="bebidas">Bebidas</button>
+        </div>
+
+        <main id="menu-container">
+            <!-- O conteúdo do cardápio será inserido aqui via JavaScript -->
+        </main>
+
+        <footer>
+            <p>Horário de funcionamento: Terça a Domingo, das 11h às 23h</p>
+            <div class="contact-info">
+                <p>Telefone: (11) 9876-5432 | Endereço: Av. Gastronômica, 456 - Centro</p>
+                <p>Delivery disponível através do nosso app</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Dados do cardápio
+        const menuData = [
+            {
+                id: 1,
+                name: "Bruschetta Italiana",
+                description: "Pão italiano grelhado com tomate fresco, manjericão, alho e azeite de oliva extra virgem.",
+                price: 19.90,
+                image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f",
+                category: "entradas",
+                tags: ["vegetariano", "italiana"]
+            },
+            {
+                id: 2,
+                name: "Carpaccio de Filé Mignon",
+                description: "Finas fatias de filé mignon cru com rúcula, parmesão, alcaparras e molho de mostarda e mel.",
+                price: 34.50,
+                image: "https://images.unsplash.com/photo-1607532941433-304659e8198a",
+                category: "entradas",
+                tags: ["tradicional", "carne"]
+            },
+            {
+                id: 3,
+                name: "Risoto de Cogumelos",
+                description: "Risoto cremoso com mix de cogumelos frescos, vinho branco e queijo parmesão.",
+                price: 48.90,
+                image: "https://images.unsplash.com/photo-1633945274309-2c16c9682a8c",
+                category: "principais",
+                tags: ["vegetariano", "italiana"]
+            },
+            {
+                id: 4,
+                name: "Filé Mignon ao Molho Madeira",
+                description: "Filé mignon grelhado ao ponto com molho de madeira, acompanha purê de batatas e legumes grelhados.",
+                price: 72.90,
+                image: "https://images.unsplash.com/photo-1588168333986-5078d3ae3976",
+                category: "principais",
+                tags: ["tradicional", "carne"]
+            },
+            {
+                id: 5,
+                name: "Salmão Grelhado",
+                description: "Salmão fresco grelhado com crosta de ervas, acompanhado de arroz de açafrão e legumes no vapor.",
+                price: 58.50,
+                image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2",
+                category: "principais",
+                tags: ["peixe", "saudável"]
+            },
+            {
+                id: 6,
+                name: "Tiramisù",
+                description: "Sobremesa italiana clássica com camadas de biscoito champanhe embebido em café e creme de mascarpone.",
+                price: 24.90,
+                image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb",
+                category: "sobremesas",
+                tags: ["italiana", "clássica"]
+            },
+            {
+                id: 7,
+                name: "Brownie com Sorvete",
+                description: "Brownie de chocolate quente com sorvete de baunilha artesanal e calda de chocolate belga.",
+                price: 21.50,
+                image: "https://images.unsplash.com/photo-1564355808539-22fda35bed7e",
+                category: "sobremesas",
+                tags: ["chocolate", "tradicional"]
+            },
+            {
+                id: 8,
+                name: "Sucos Naturais",
+                description: "Opções: laranja, abacaxi com hortelã, maracujá ou morango (500ml).",
+                price: 13.90,
+                image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a",
+                category: "bebidas",
+                tags: ["natural", "refrescante"]
+            },
+            {
+                id: 9,
+                name: "Vinho Tinto da Casa",
+                description: "Taça do vinho tinto selecionado (consultar opções do dia).",
+                price: 19.90,
+                image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3",
+                category: "bebidas",
+                tags: ["vinho", "alcoólico"]
+            }
+        ];
+
+        // Categorias para agrupamento
+        const categories = [
+            { id: "entradas", name: "Entradas" },
+            { id: "principais", name: "Pratos Principais" },
+            { id: "sobremesas", name: "Sobremesas" },
+            { id: "bebidas", name: "Bebidas" }
+        ];
+
+        // Função para renderizar o cardápio
+        function renderMenu(category = 'all') {
+            const menuContainer = document.getElementById('menu-container');
+            menuContainer.innerHTML = '';
+
+            // Filtra os itens se não for 'all'
+            const filteredItems = category === 'all' 
+                ? menuData 
+                : menuData.filter(item => item.category === category);
+
+            // Agrupa por categoria
+            const groupedItems = {};
+            filteredItems.forEach(item => {
+                if (!groupedItems[item.category]) {
+                    groupedItems[item.category] = [];
+                }
+                groupedItems[item.category].push(item);
+            });
+
+            // Renderiza as seções
+            if (category === 'all') {
+                // Mostra todas as categorias com itens
+                categories.forEach(cat => {
+                    if (groupedItems[cat.id]) {
+                        renderSection(cat.name, groupedItems[cat.id]);
+                    }
+                });
+            } else {
+                // Mostra apenas a categoria selecionada
+                const categoryName = categories.find(c => c.id === category)?.name || category;
+                renderSection(categoryName, filteredItems);
+            }
+        }
+
+        // Função para renderizar uma seção do cardápio
+        function renderSection(title, items) {
+            const menuContainer = document.getElementById('menu-container');
+            
+            const section = document.createElement('div');
+            section.className = 'menu-section';
+            
+            section.innerHTML = `
+                <h2 class="section-title">${title}</h2>
+                <div class="menu-items">
+                    ${items.map(item => `
+                        <article class="menu-item" data-category="${item.category}">
+                            <img src="${item.image}" alt="${item.name}" class="item-image">
+                            <div class="item-details">
+                                <div class="item-header">
+                                    <h3 class="item-title">${item.name}</h3>
+                                    <span class="item-price">R$ ${item.price.toFixed(2)}</span>
+                                </div>
+                                <p class="item-description">${item.description}</p>
+                                <div class="item-tags">
+                                    ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        </article>
+                    `).join('')}
+                </div>
+            `;
+            
+            menuContainer.appendChild(section);
+        }
+
+        // Filtragem por categoria
+        document.addEventListener('DOMContentLoaded', function() {
+            // Renderiza o cardápio completo inicialmente
+            renderMenu();
+            
+            // Adiciona event listeners aos botões de filtro
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove a classe 'active' de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Adiciona a classe 'active' ao botão clicado
+                    this.classList.add('active');
+                    
+                    // Obtém a categoria do atributo data
+                    const category = this.getAttribute('data-category');
+                    
+                    // Renderiza o cardápio filtrado
+                    renderMenu(category);
+                });
+            });
+        });
+
+        // Efeito de carregamento suave
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
