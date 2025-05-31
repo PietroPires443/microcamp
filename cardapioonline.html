@@ -33,6 +33,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
         }
         
         /* Cabeçalho */
@@ -120,6 +121,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             border: 1px solid #eee;
+            position: relative;
         }
         
         .menu-item:hover {
@@ -181,6 +183,285 @@
             font-weight: 500;
         }
         
+        .add-to-cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .add-to-cart:hover {
+            transform: scale(1.1);
+            background-color: var(--dark);
+        }
+        
+        /* Carrinho de Compras */
+        .cart-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 99;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .cart-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        
+        .quantity-btn {
+            background-color: var(--light);
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity {
+            margin: 0 10px;
+        }
+        
+        .remove-item {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        .cart-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .checkout-btn:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Modal de Finalização */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .payment-methods {
+            margin: 20px 0;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .payment-method input {
+            margin-right: 10px;
+        }
+        
+        .confirm-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .confirm-btn:hover {
+            background-color: var(--dark);
+        }
+        
         /* Rodapé */
         footer {
             text-align: center;
@@ -209,6 +490,15 @@
                 padding: 10px 15px;
                 font-size: 0.9rem;
             }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .cart-sidebar.active {
+                right: 0;
+            }
         }
     </style>
 </head>
@@ -218,6 +508,70 @@
             <h1>Restaurante Delícia</h1>
             <p class="subtitle">Cardápio Digital</p>
         </header>
+
+        <button class="cart-btn">
+            🛒
+            <span class="cart-count">0</span>
+        </button>
+
+        <div class="cart-sidebar">
+            <div class="cart-header">
+                <h3 class="cart-title">Seu Carrinho</h3>
+                <button class="close-cart">✕</button>
+            </div>
+            <div class="cart-items">
+                <!-- Itens do carrinho serão adicionados aqui -->
+            </div>
+            <div class="cart-total">
+                Total: R$ <span class="total-amount">0.00</span>
+            </div>
+            <button class="checkout-btn">Finalizar Pedido</button>
+        </div>
+
+        <div class="modal" id="checkout-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Finalizar Pedido</h3>
+                    <button class="close-modal">✕</button>
+                </div>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone (WhatsApp):</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Endereço de Entrega:</label>
+                        <input type="text" id="address" required>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h4>Forma de Pagamento:</h4>
+                        <div class="payment-method">
+                            <input type="radio" id="pix" name="payment" value="PIX" checked>
+                            <label for="pix">PIX</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="credit" name="payment" value="Cartão de Crédito">
+                            <label for="credit">Cartão de Crédito</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="debit" name="payment" value="Cartão de Débito">
+                            <label for="debit">Cartão de Débito</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="cash" name="payment" value="Dinheiro">
+                            <label for="cash">Dinheiro</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="confirm-btn">Enviar Pedido via WhatsApp</button>
+                </form>
+            </div>
+        </div>
 
         <div class="category-filters">
             <button class="filter-btn active" data-category="all">Todos</button>
@@ -334,6 +688,9 @@
             { id: "bebidas", name: "Bebidas" }
         ];
 
+        // Carrinho de compras
+        let cart = [];
+        
         // Função para renderizar o cardápio
         function renderMenu(category = 'all') {
             const menuContainer = document.getElementById('menu-container');
@@ -380,6 +737,7 @@
                 <div class="menu-items">
                     ${items.map(item => `
                         <article class="menu-item" data-category="${item.category}">
+                            <button class="add-to-cart" data-id="${item.id}">+</button>
                             <img src="${item.image}" alt="${item.name}" class="item-image">
                             <div class="item-details">
                                 <div class="item-header">
@@ -397,9 +755,168 @@
             `;
             
             menuContainer.appendChild(section);
+            
+            // Adiciona event listeners aos botões de adicionar ao carrinho
+            section.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    addToCart(itemId);
+                });
+            });
         }
 
-        // Filtragem por categoria
+        // Função para adicionar item ao carrinho
+        function addToCart(itemId) {
+            const item = menuData.find(i => i.id === itemId);
+            if (!item) return;
+            
+            const existingItem = cart.find(i => i.id === itemId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...item,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Feedback visual
+            const button = document.querySelector(`.add-to-cart[data-id="${itemId}"]`);
+            if (button) {
+                button.textContent = '✓';
+                button.style.backgroundColor = '#2a9d8f';
+                setTimeout(() => {
+                    button.textContent = '+';
+                    button.style.backgroundColor = 'var(--primary)';
+                }, 1000);
+            }
+        }
+
+        // Função para remover item do carrinho
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCart();
+        }
+
+        // Função para atualizar a quantidade de um item no carrinho
+        function updateQuantity(itemId, newQuantity) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                if (newQuantity < 1) {
+                    removeFromCart(itemId);
+                } else {
+                    item.quantity = newQuantity;
+                }
+                updateCart();
+            }
+        }
+
+        // Função para atualizar a exibição do carrinho
+        function updateCart() {
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const cartCount = document.querySelector('.cart-count');
+            const totalAmount = document.querySelector('.total-amount');
+            
+            // Atualiza itens do carrinho
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Seu carrinho está vazio</p>';
+            } else {
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">R$ ${(item.price * item.quantity).toFixed(2)}</div>
+                            <div class="cart-item-actions">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                                <button class="remove-item" data-id="${item.id}">Remover</button>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+                
+                // Adiciona event listeners aos botões de quantidade
+                cartItemsContainer.querySelectorAll('.minus').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const itemId = parseInt(this.getAttribute('data-id'));
+                        const item = cart.find(i => i.id === itemId);
+                        if (item) {
+                            updateQuantity(itemId, item.quantity - 1);
+                        }
+                    });
+                });
+                
+                cartItemsContainer.querySelectorAll('.plus').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const itemId = parseInt(this.getAttribute('data-id'));
+                        const item = cart.find(i => i.id === itemId);
+                        if (item) {
+                            updateQuantity(itemId, item.quantity + 1);
+                        }
+                    });
+                });
+                
+                cartItemsContainer.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const itemId = parseInt(this.getAttribute('data-id'));
+                        removeFromCart(itemId);
+                    });
+                });
+            }
+            
+            // Atualiza contador e total
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            totalAmount.textContent = totalPrice.toFixed(2);
+        }
+
+        // Função para enviar pedido para o WhatsApp
+        function sendToWhatsApp(customerData) {
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
+            }
+            
+            // Formata a mensagem
+            let message = `*Pedido do Restaurante Delícia*%0A%0A`;
+            message += `*Cliente:* ${customerData.name}%0A`;
+            message += `*Telefone:* ${customerData.phone}%0A`;
+            message += `*Endereço:* ${customerData.address}%0A`;
+            message += `*Forma de Pagamento:* ${customerData.payment}%0A%0A`;
+            
+            message += `*Itens do Pedido:*%0A`;
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2)}%0A`;
+            });
+            
+            message += `%0A*Total: R$ ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}*`;
+            message += `%0A%0AObrigado pelo seu pedido!`;
+            
+            // Número do WhatsApp do restaurante (substitua pelo número real)
+            const whatsappNumber = '5511987654321';
+            
+            // Abre o WhatsApp com a mensagem formatada
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+            
+            // Limpa o carrinho após o envio
+            cart = [];
+            updateCart();
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
             // Renderiza o cardápio completo inicialmente
             renderMenu();
@@ -420,6 +937,57 @@
                     // Renderiza o cardápio filtrado
                     renderMenu(category);
                 });
+            });
+            
+            // Carrinho - toggle sidebar
+            const cartBtn = document.querySelector('.cart-btn');
+            const cartSidebar = document.querySelector('.cart-sidebar');
+            const closeCartBtn = document.querySelector('.close-cart');
+            
+            cartBtn.addEventListener('click', function() {
+                cartSidebar.classList.add('active');
+            });
+            
+            closeCartBtn.addEventListener('click', function() {
+                cartSidebar.classList.remove('active');
+            });
+            
+            // Finalizar pedido
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            const checkoutModal = document.getElementById('checkout-modal');
+            const closeModalBtn = document.querySelector('.close-modal');
+            const checkoutForm = document.getElementById('checkout-form');
+            
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Seu carrinho está vazio!');
+                    return;
+                }
+                checkoutModal.style.display = 'flex';
+            });
+            
+            closeModalBtn.addEventListener('click', function() {
+                checkoutModal.style.display = 'none';
+            });
+            
+            checkoutForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const customerData = {
+                    name: document.getElementById('name').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    payment: document.querySelector('input[name="payment"]:checked').value
+                };
+                
+                sendToWhatsApp(customerData);
+            });
+            
+            // Fecha o modal ao clicar fora
+            checkoutModal.addEventListener('click', function(e) {
+                if (e.target === checkoutModal) {
+                    checkoutModal.style.display = 'none';
+                }
             });
         });
 
